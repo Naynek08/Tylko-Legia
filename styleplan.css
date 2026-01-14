@@ -1,0 +1,22 @@
+h2{
+	font-size: 30px;
+	color: red;
+}
+h3{
+	font-size: 15px;
+	color:blue;
+}
+h4{
+	font-family: Calibri;
+	font-size: 10px;
+	color: green;
+}
+h5{
+	font-weight: bold;
+	font-family: Times New Roman;
+	font-size: 17px;
+	background-color: #2E306B;
+}
+th{
+	background-color: olive;
+{
