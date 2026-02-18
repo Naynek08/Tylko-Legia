@@ -47,6 +47,7 @@ Pole tekstowe o nazwie jakas_wymyslona_nazwa2 jest pierwszym elementem formularz
 */
 var skl1=parseFloat(document.Form.a.value);
 var skl2=parseFloat(document.Form.b.value);
+  if (skl2 === 0) { alert("Nie można dzielić przez 0"); return; }
 var wynik = skl1/skl2;
 alert(wynik);
 }
@@ -69,3 +70,4 @@ alert(wynik);
 
 </body>
 </html>
+
