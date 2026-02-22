@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Kalkulator BMI</title>
+
+<script type="text/javascript">
+
+function obliczBMI() {
+
+    var wzrost = parseFloat(document.forms["bmiForm"]["wzrost"].value);
+    var waga = parseFloat(document.forms["bmiForm"]["waga"].value);
+    var poSniadaniu = document.forms["bmiForm"]["sniadanie"].checked;
+    var narodowosc = document.querySelector('input[name="narodowosc"]:checked');
+
+    // WALIDACJA
+    if (isNaN(wzrost) || isNaN(waga)) {
+        alert("Podaj poprawne liczby.");
+        return false;
+    }
+
+    if (wzrost < 100 || wzrost > 250) {
+        alert("Wzrost musi być w zakresie 100–250 cm.");
+        return false;
+    }
+
+    if (waga <= 0 || waga > 200) {
+        alert("Waga musi być w zakresie 0–200 kg.");
+        return false;
+    }
+
+    if (!narodowosc) {
+        alert("Wybierz populację.");
+        return false;
+    }
+
+    // OBLICZENIE BMI
+    var wzrostM = wzrost / 100;
+    var bmi = waga / (wzrostM * wzrostM);
+    var bmiZaokr = bmi.toFixed(2);
+
+    var wynikTekst = "";
+
+    // KLASYFIKACJA
+    if (narodowosc.value == "Azjata") {
+
+        // niższe progi
+        if (bmi < 18.5)
+            wynikTekst = "Niedowaga";
+        else if (bmi < 23)
+            wynikTekst = "Waga prawidłowa";
+        else if (bmi < 27.5)
+            wynikTekst = "Nadwaga";
+        else
+            wynikTekst = "Otyłość";
+
+    } else {
+
+        // standard Europa
+        if (bmi < 18.5)
+            wynikTekst = "Niedowaga";
+        else if (bmi < 25)
+            wynikTekst = "Waga prawidłowa";
+        else if (bmi < 30)
+            wynikTekst = "Nadwaga";
+        else
+            wynikTekst = "Otyłość";
+    }
+
+    var info = "Twoje BMI: " + bmiZaokr +
+               "\nKategoria: " + wynikTekst +
+               "\nPopulacja: " + narodowosc.value;
+
+    if (poSniadaniu)
+        info += "\n(Obliczenie po śniadaniu)";
+
+    alert(info);
+
+    return false;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h2>Kalkulator BMI</h2>
+
+<form name="bmiForm" onsubmit="return obliczBMI();">
+
+Wzrost (cm): <br>
+<input type="text" name="wzrost"><br><br>
+
+Waga (kg): <br>
+<input type="text" name="waga"><br><br>
+
+<input type="checkbox" name="sniadanie"> Jestem po śniadaniu<br><br>
+
+Populacja:<br>
+<input type="radio" name="narodowosc" value="Europejczyk"> Europejczyk<br>
+<input type="radio" name="narodowosc" value="Azjata"> Azjata<br><br>
+
+<input type="submit" value="Oblicz BMI">
+
+</form>
+
+</body>
+</html>
